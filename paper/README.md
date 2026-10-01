@@ -1,8 +1,10 @@
-# REALBIM: ISPA 2026 source, revision r32
+# REALBIM: ISPA 2026 source, revision r33
 
 LaTeX source of *REALBIM: A Framework for Safe Early Reuse of Shared GPU Buffers Across Processes*
-(eight pages). r32 answers an outside reviewer's fifth round: a reordered introduction, a restructured
-abstract, less defensive phrasing, and clearer names for the hand-placed baselines; see CHANGES.md.
+(eight pages). r33 answers an outside reviewer's sixth round. It has less polished and less defensive prose,
+contributions stated plainly, consistent "early/late" wording, distinct names for the two hand-placed
+baselines, an expanded conclusion, and 25 references instead of 30. See CHANGES.md; marked-up changes are in
+qa/r33_vs_r32_latexdiff.pdf.
 
 ## Build
 Compile `main.tex` with **pdfLaTeX** (Overleaf: upload this ZIP, choose main.tex, pdfLaTeX):
@@ -16,7 +18,7 @@ or `sh build.sh` / `./build.ps1`. `main.bbl` is included as a bibliography snaps
 - `figures/*.pdf`, in paper order: `fig0_scene.pdf` (Fig. 1, scenario), `fig_lifetimes.pdf` (Fig. 2, two
   lifetimes; new in r30), `fig1_framework.pdf` (Fig. 3, architecture), `fig2_trace.pdf` (Fig. 4),
   `fig3_boundaries.pdf` (Fig. 5), `fig5_delivery.pdf` (Fig. 6), `fig6_slots.pdf` (Fig. 7),
-  `fig7_mixed.pdf` (Fig. 8). Figs. 5-8 received label and color edits in r30-r31 (see below).
+  `fig7_mixed.pdf` (Fig. 8). Figs. 5-8 received label and color edits in r30-r33 (see below).
 - Fig. 1 sources: `figures/src/fig0_scene.tex` with `scene_icons.tex`, `bev_frame.png`, and `bev_feat.png`
   (`xelatex fig0_scene.tex`). Both images are rendered by `figures/src/render_bev.py` from one nuScenes-mini
   LiDAR sweep: the top-down panel, and an illustrative feature texture for the map's front face; source
@@ -28,11 +30,13 @@ or `sh build.sh` / `./build.ps1`. `main.bbl` is included as a bibliography snaps
   (MIT); licenses and icon lists are in `figures/src/ICONS-LICENSE.txt`. To regenerate, unpack the npm
   packages `lucide-static` and `@tabler/icons` into `figures/src/icons/` and run
   `python3 svg2tikz.py L:camera L:gpu ... > scene_icons.tex` (icon lists in ICONS-LICENSE.txt).
-- `figures/src/relabel_figures.py` (r22), `relabel_r30.py` (r30), `relabel_r31.py` (r31), and
-  `relabel_r32.py` (r32): label, color, and legend-layout edits to the plot PDFs (no data touched);
-  reports in `qa/`.
-- `qa/`: build checks (`r32_build_check.json` for this revision). `verify_pdf.py`: optional
-  page-by-page comparison of a rebuild against a reference PDF (use the r32 PDF as the reference).
+- `figures/src/relabel_figures.py` (r22), `relabel_r30.py` (r30), `relabel_r31.py` (r31),
+  `relabel_r32.py` (r32), and `relabel_r33.py` (r33, Fig. 8 legend: "REALBIM (hand-placed)"): label, color,
+  and legend-layout edits to the plot PDFs (no data touched); reports in `qa/`. The scripts need PyMuPDF and
+  the Carlito font.
+- `qa/`: build checks (`r33_build_check.json` for this revision) and `r33_vs_r32_latexdiff.pdf`.
+  `verify_pdf.py`: optional page-by-page comparison of a rebuild against a reference PDF (use the r33 PDF as
+  the reference).
 - `CHANGES.md`: what changed and why.
 
 The framework name is defined once in main.tex (`\newcommand{\sys}{REALBIM}`); Figs. 2-3 and the plot

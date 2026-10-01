@@ -1,3 +1,114 @@
+# r33: outside reviewer, sixth round; expanded conclusion; fewer references
+
+Built from the r32 source. No experiment was rerun and no measured number changed: every number in the r33
+body also appears in r32 and vice versa (one repeated mention of 78.6 was dropped). Eight pages, page 8 full
+(about two lines spare). References 30 -> 25. Algorithm 1 is still printed. Marked-up changes:
+qa/r33_vs_r32_latexdiff.pdf.
+
+The goals were less AI-sounding and less defensive prose, contributions stated plainly, and a paper an outsider
+can follow. The review's points, in the order it raised them:
+
+## "Early" and "late"
+- "Late" now means a missed deadline only ("correct but late"). Where a read falls in a graph is said with
+  "boundary", "last read comes early", or "at the graph's end". Reordered readers are "the second reader".
+- The abstract no longer uses "reads late" or "the late reader". Fig. 8's caption says "one with its last read
+  at the graph's end".
+- Figure labels are unchanged (Fig. 5 "Add late read", "Remove late read", "Read alias late"; Fig. 6d "late
+  read"). The text cites them as edit names. See "Please confirm" 5.
+
+## Abstract
+- The "REAd-Last BIM" expansion is gone from the abstract and kept in Section I. Names now arrive with what they
+  do: "Its cross-process layer, Borrow-in-Memory (BIM), ... Its in-process layer, ReadSeal, ...".
+- "Refuses a stale plan" becomes "refuses to run if the code, model, or input layout has changed".
+- The "Too early, and ...; too late, and ..." antithesis is replaced by one plain sentence.
+- The scope condition goes with the headline number ("with recipients whose models stop reading the map
+  early"), and the latency cost stays as one clause. The copy comparison is now a positive result ("matches
+  per-recipient copies without their 256 MiB"), and the "a copy delivers more" case moved to Section VI.
+- The safety sentence says "the second reader", per the review's wording.
+
+## Introduction
+- The meta-definition "we say slot when we mean ... and source when we mean ..." is gone. The source is now
+  defined in one clause: "the tensor in a slot, which we call the source".
+- The "just add a second buffer" objection is answered in paragraph 3: "A second slot recovers most of these
+  frames but costs another 64 MiB per shared tensor; we show that one slot, released at the right moment,
+  delivers as many results as two (Section V-C)."
+- The key observation gets evidence beyond one head: "each of the nine torchvision model tails that our
+  analysis accepts stops reading its input within its first 12 operations (Section V-F)". The wording says
+  "accepts" deliberately, because five models were rejected.
+- Results paragraph: early last reads, 1.31-1.50x at 8-11 ms, matches copies, never the wrong frame, and
+  re-planning after 16 model changes in 0.08-0.21 s. It ends on "Section VI discusses when a private copy is
+  the better choice", so the contributions no longer follow the case where copying wins.
+- Contributions: (1) the two-lifetime split is now a bullet; (2) BIM leads with what is new (protection for
+  recipients that have not submitted any GPU work, "as no event-based policy can"), and the relation to
+  ipc_shared_ptr stays in Related Work; (3) ReadSeal. The old third bullet, which read like an evaluation
+  result, is gone; its numbers are in the results paragraph.
+
+## Background, Sections III-IV
+- Section II opens with one signposting sentence.
+- The running example now states its point: "So when A's event completes, B has submitted nothing and there is
+  no event to wait on: stream-only release makes the slot reusable while B still needs it."
+- The descriptor paragraph is folded into "Life of a frame". Algorithm 1's BuildPlan is two lines instead of
+  three.
+
+## Evaluation
+- Section V opens by saying outright that the hand-placed baselines match REALBIM's delivery by design: the
+  throughput gain comes from where the borrow ends, and derivation pays off in safety (Section V-E, including
+  the ResNet-18 residual read).
+- Fig. 6's caption says the same: "Hand-placed releases at the same point as REALBIM by design".
+- The baselines have distinct names in the text, Table II, and the plots. "Hand-placed" is the standalone
+  runtime (Figs. 6-7). "REALBIM (hand-placed)" is REALBIM with a hand-placed boundary (Fig. 8 legend relabeled
+  by figures/src/relabel_r33.py; the entry moved 17 pt left, no pixel below the legend changed). Table II:
+  H and Rh replace Hs and Hr.
+- Defensive asides removed: "(78.6 in Fig. 6d, from separate runs)" and "a two-slot rate sweep that we do not
+  plot".
+- V-C's held-storage result now ends on itself ("memory that an allocator could lend to other work"). The
+  fixed-pool caveat and the device peaks (5,078 / 5,142 MiB) moved to Limitations, so the caveat is stated
+  once, where it belongs.
+- "As with bufferbloat ..., this adds delay but not throughput" is now a plain sentence that leads into the
+  numbers.
+
+## Discussion
+- "Borrow or copy" leads with the decision rule, not with "where memory is plentiful, copies are simpler".
+- New "Beyond the A100" paragraph argues why the result should transfer. The delivery gain depends on how the
+  hold compares with the frame period (Eq. 1), not on memory capacity. What an SoC changes is the price of the
+  alternatives, so "we expect borrowing to save more on an SoC". This is reasoning, not a measurement; see
+  "Please confirm" 1.
+
+## Conclusion (131 -> 224 words)
+- Three paragraphs:
+  1. The problem and the insight: two lifetimes; one mechanism ending a borrow at different points.
+  2. What REALBIM adds and the headline results: 1.31-1.50x, one slot matches two under full retention, no
+     wrong frame, re-planning within 0.21 s.
+  3. What the derived boundary enables (the borrow-or-copy choice; the message property ROS 2 timing analyses
+     assume), then future work.
+
+## References (30 -> 25)
+- Dropped, no longer cited:
+  - UniAD (CVPR'23): BEVFusion already makes the several-readers point.
+  - Teper et al. (RTSS'22) and Li et al. (RTSS'22): the ROS 2 survey [3] covers chain latency, data age, and
+    time disparity.
+  - Pearce (TOPLAS'21): Descend already covers borrow checking, over GPU memory.
+  - Bakita and Anderson (RTAS'23): "partition" dropped from the GPU-sharing sentence; REEF and Orion remain.
+- Shorter entries: the Orin data sheet is cited by document number (DS-10662-001) without its URL; the ROS 2
+  CUDA buffer backend title is shortened, which fixes its badly spaced three-line entry.
+
+## Style pass
+- Fewer stacked clauses: sentences over 35 words 18 -> 17, mean sentence 21.2 -> 20.9 words (same counter for
+  both revisions; see qa/r33_build_check.json).
+- Analogies kept: library book, bufferbloat, RCU.
+
+## Please confirm
+1. The "Beyond the A100" paragraph (Section VI) argues why the result should transfer to an SoC and says "we
+   expect". It adds no measurement. Keep it, or cut it to the Limitations sentence?
+2. Contribution 2 and the Conclusion claim that no event-based policy can protect a recipient that has not
+   submitted GPU work. This rests on Section II: a CUDA event marks only enqueued work.
+3. Section I generalizes the early last read from the survey in V-F: nine accepted torchvision tails, all with
+   boundaries in their first 12 operations.
+4. Fig. 8 legend: "REALBIM (hand-placed)". Figs. 6-7 keep "Hand-placed" for the standalone runtime.
+5. Figure labels still use "late read" for graph position (Figs. 5 and 6d). Relabeling them to, e.g., "Add end
+   read" needs the same PDF legend edit as Fig. 8. Say if you want it.
+6. The five dropped references.
+
 # r32: outside reviewer, fifth round
 
 Built from the r31 source. No experiment was rerun and no measured number changed (every number in the

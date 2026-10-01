@@ -1,6 +1,7 @@
-% References for "REALBIM: A Framework for Safe Early Reuse of Shared GPU Buffers Across Processes" (ISPA 2026, r22).
+% References for "REALBIM: A Framework for Safe Early Reuse of Shared GPU Buffers Across Processes" (ISPA 2026, r33).
 % r22 replaces most web pages and pre-2016 papers with recent peer-reviewed work where one exists.
 % Primary documentation is kept only where a claim depends on a specific API contract.
+% r33 drops five entries no longer cited (UniAD, Teper et al., Pearce, Bakita and Anderson 2023, Li et al.) to make room.
 
 % ---- Autonomous driving, ROS 2, BEV perception ----
 @inproceedings{autowareonboard,
@@ -79,7 +80,7 @@
 }
 @misc{cudabackend,
   author       = {{Open Robotics}},
-  title        = {\texttt{cuda\_buffer\_backend} ({ROS} 2 \texttt{rosidl\_buffer\_backends})},
+  title        = {{ROS} 2 \texttt{cuda\_buffer\_backend}},
   howpublished = {\url{https://github.com/ros2/rosidl_buffer_backends}},
   year         = {2026}
 }
@@ -136,15 +137,6 @@
 }
 
 % ---- Ownership, task runtimes, reclamation, asynchronous buffers ----
-@article{pearce,
-  author  = {D. J. Pearce},
-  title   = {A lightweight formalism for reference lifetimes and borrowing in {Rust}},
-  journal = {ACM Trans. Program. Lang. Syst.},
-  volume  = {43},
-  number  = {1},
-  year    = {2021},
-  note    = {Art. no. 3}
-}
 @article{descend,
   author  = {B. K{\"o}pcke and S. Gorlatch and M. Steuwer},
   title   = {Descend: A safe {GPU} systems programming language},
@@ -179,20 +171,6 @@
 }
 
 % ---- added in r24 (recent peer-reviewed work) ----
-@inproceedings{teper,
-  author    = {H. Teper and others},
-  title     = {End-to-end timing analysis in {ROS2}},
-  booktitle = {Proc. IEEE RTSS},
-  year      = {2022},
-  pages     = {53--65}
-}
-@inproceedings{bakita23,
-  author    = {J. Bakita and J. H. Anderson},
-  title     = {Hardware compute partitioning on {NVIDIA} {GPUs}},
-  booktitle = {Proc. IEEE RTAS},
-  year      = {2023},
-  pages     = {54--66}
-}
 @inproceedings{bakita24,
   author    = {J. Bakita and J. H. Anderson},
   title     = {Demystifying {NVIDIA} {GPU} internals to enable reliable {GPU} management},
@@ -211,21 +189,7 @@
 }
 @misc{orin,
   author       = {{NVIDIA}},
-  title        = {Jetson {AGX} {Orin} Series Data Sheet ({DS-10662-001})},
-  howpublished = {\url{https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/}},
+  title        = {Jetson {AGX} {Orin} Series Data Sheet},
+  howpublished = {DS-10662-001},
   year         = {2023}
-}
-@inproceedings{uniad,
-  author    = {Y. Hu and others},
-  title     = {Planning-oriented autonomous driving},
-  booktitle = {Proc. IEEE/CVF CVPR},
-  year      = {2023},
-  pages     = {17853--17862}
-}
-@inproceedings{timedisparity,
-  author    = {R. Li and others},
-  title     = {Worst-case time disparity analysis of message synchronization in {ROS}},
-  booktitle = {Proc. IEEE RTSS},
-  year      = {2022},
-  pages     = {40--52}
 }

@@ -40,10 +40,6 @@ Z.~Liu \emph{et~al.}, ``{BEVFusion}: Multi-task multi-sensor fusion with
   unified bird's-eye view representation,'' in \emph{Proc. IEEE ICRA}, 2023,
   pp. 2774--2781.
 
-\bibitem{uniad}
-Y.~Hu \emph{et~al.}, ``Planning-oriented autonomous driving,'' in \emph{Proc.
-  IEEE/CVF CVPR}, 2023, pp. 17\,853--17\,862.
-
 \bibitem{nuscenes}
 H.~Caesar \emph{et~al.}, ``{nuScenes}: A multimodal dataset for autonomous
   driving,'' in \emph{Proc. IEEE/CVF CVPR}, 2020, pp. 11\,621--11\,631.
@@ -54,9 +50,7 @@ I.~Dagli and M.~E. Belviranli, ``Shared memory-contention-aware concurrent
   ACM PPoPP}, 2024, pp. 243--256.
 
 \bibitem{orin}
-{NVIDIA}, ``Jetson {AGX} {Orin} series data sheet ({DS-10662-001}),''
-  \url{https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/},
-  2023.
+{NVIDIA}, ``Jetson {AGX} {Orin} series data sheet,'' DS-10662-001, 2023.
 
 \bibitem{agnocast}
 T.~Ishikawa-Aso and S.~Kato, ``{ROS} 2 {Agnocast}: Supporting unsized message
@@ -74,8 +68,7 @@ O.~Bell, C.~Gill, and X.~Zhang, ``Hardware acceleration with zero-copy memory
   pp. 28--37.
 
 \bibitem{cudabackend}
-{Open Robotics}, ``\texttt{cuda\_buffer\_backend} ({ROS} 2
-  \texttt{rosidl\_buffer\_backends}),''
+{Open Robotics}, ``{ROS} 2 \texttt{cuda\_buffer\_backend},''
   \url{https://github.com/ros2/rosidl_buffer_backends}, 2026.
 
 \bibitem{ipcsharedptr}
@@ -126,31 +119,14 @@ F.~Strati, X.~Ma, and A.~Klimovic, ``Orion: Interference-aware, fine-grained
   {GPU} sharing for {ML} applications,'' in \emph{Proc. ACM EuroSys}, 2024, pp.
   1075--1092.
 
-\bibitem{bakita23}
-J.~Bakita and J.~H. Anderson, ``Hardware compute partitioning on {NVIDIA}
-  {GPUs},'' in \emph{Proc. IEEE RTAS}, 2023, pp. 54--66.
-
 \bibitem{nvscistream}
 {NVIDIA}, ``{NvSciStream} {API} reference ({DRIVE} {OS} 6.0),''
   \url{https://developer.nvidia.com/docs/drive/drive-os/6.0.8/public/drive-os-linux-sdk/api_reference/group__nvsci__stream__apis.html}.
-
-\bibitem{teper}
-H.~Teper \emph{et~al.}, ``End-to-end timing analysis in {ROS2},'' in
-  \emph{Proc. IEEE RTSS}, 2022, pp. 53--65.
-
-\bibitem{timedisparity}
-R.~Li \emph{et~al.}, ``Worst-case time disparity analysis of message
-  synchronization in {ROS},'' in \emph{Proc. IEEE RTSS}, 2022, pp. 40--52.
 
 \bibitem{telamalloc}
 M.~Maas, U.~Beaugnon, A.~Chauhan, and B.~Ilbeyi, ``{TelaMalloc}: Efficient
   on-chip memory allocation for production machine learning accelerators,'' in
   \emph{Proc. ACM ASPLOS}, 2023, pp. 123--137.
-
-\bibitem{pearce}
-D.~J. Pearce, ``A lightweight formalism for reference lifetimes and borrowing
-  in {Rust},'' \emph{ACM Trans. Program. Lang. Syst.}, vol.~43, no.~1, 2021,
-  art. no. 3.
 
 \bibitem{descend}
 B.~K{\"o}pcke, S.~Gorlatch, and M.~Steuwer, ``Descend: A safe {GPU} systems
